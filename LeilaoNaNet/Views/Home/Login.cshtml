@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Login - Seja Bem Vindo(a)";
+    Layout = null;
+}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<link href="~/Content/Login.css" rel="stylesheet" />
+<body>
+    <div class="login">
+        <div class="login-screen">
+            <div class="app-title">
+                <img src="https://uploaddeimagens.com.br/images/003/072/345/full/aa.png?1612639501" width="100%" height="auto" />
+                <br />
+            </div>
+            <br />
+        @using (Html.BeginForm("LogarUsuario", "Usuarios", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <div class="login-form">
+                <div class="control-group">
+                    <input type="text" class="login-field" placeholder="Ex:Ramon438" name="Nome" id="login_nome">
+                    <label for="login_nome"></label>
+                </div>
+
+                <div class="control-group">
+                    <input type="text" class="key" placeholder="******" name="Senha" id="login_senha">
+                    <label for="login_senha"></label>
+                </div>
+
+                <button class="btn btn-primary btn-large btn-block">login</button>
+                <div>
+                    <p>
+                        Não possui login? <b>@Html.ActionLink("Cadastre-se!", "NovoUsuario", "Usuarios")</b>
+                    </p>
+                </div>
+                @if (Session["LoginFailed"] != null)
+                {
+                    <div>
+                        <p>
+                        <b><span style="color: red">Atenção, erro de usuário ou senha.</span></b>
+                        </p>
+                    </div>
+                }
+            </div>
+        }
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+                //function logar() {
+                //    var nome = $('#login_nome').val();
+                //    var senha = $('#login_senha').val();
+                //    var UsuarioViewModel = {
+                //        nome: nome,
+                //        senha: senha
+                //    }
+                //    $.ajax({
+                //        type: "POST",
+                //        url: "/Usuarios/LogarUsuario",
+                //        data: UsuarioViewModel,
+                //        success: function() {
+                //            window.location.href = "/Produtos/";
+                //        }
+                //    });
+                //}
+    </script>
+</body>

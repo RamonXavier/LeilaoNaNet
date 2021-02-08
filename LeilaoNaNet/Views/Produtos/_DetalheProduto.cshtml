@@ -1,0 +1,232 @@
+﻿@model LeilaoNaNet.ViewModel.ProdutosViewModel
+@{
+    Layout = null;
+}
+@if (@Model.TipoAcao == "Detalhe")
+{
+    <div class="modal fade" id="modalProduto" tabindex="-1" role="dialog" aria-labelledby="modalProdutoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detalhes do produto: @Model.Nome</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <center>
+                        <div class="card" style="width: 100%;">
+                            <img class="card-img-top" src="@Model.imagem" alt="Card image cap" width="100%" height="auto">
+                            <div class="card-body">
+                                <h1>@Model.Nome</h1>
+                                <h1>R$@Model.ValorInicial</h1>
+                            </div>
+                        </div>
+                    </center>
+                    <div class="card" style="width: 100%;">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">@Model.DiasRestantes dias de leilão</li>
+                            <li class="list-group-item">Valor inicial de: @Model.ValorInicial</li>
+                            <li class="list-group-item">Código do produto: @Model.Id </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (@Model.TipoAcao == "Editar")
+{
+    <div class="modal fade" id="modalProduto" tabindex="-1" role="dialog" aria-labelledby="modalProdutoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar produto: @Model.Nome</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="box-white">
+                        <div class="box-screen">
+                            <center>
+                                <div class="card" style="width: 100%;">
+                                    <img class="card-img-top" src="@Model.imagem" alt="Card image cap" width="100%" height="auto">
+                                    <div class="card-body">
+                                        <h1>@Model.Nome</h1>
+                                        <h1>R$@Model.ValorInicial</h1>
+                                    </div>
+                                </div>
+                            </center>
+                            <br />
+                            <div class="cadastro-form">
+                                <div class="control-group">
+                                    <label for="prod_nome" class="label_Form">Nome do Produto: </label><br />
+                                    <input type="text" class="form-control" value="@Model.Nome" id="prod_nome">
+                                </div>
+
+                                <div class="control-group">
+                                    <label for="prod_valor" class="label_Form">Valor Inicial: </label><br />
+                                    <input type="text" class="form-control" value="@Model.ValorInicial" id="prod_valor" pattern="^\d*(\.\d{0,2})?$">
+                                </div>
+
+                                <div class="control-group">
+                                    <label for="prod_dias" class="label_Form">Dias Ativo: </label><br />
+                                    <input type="text" class="form-control" value="@Model.DiasRestantes" id="prod_dias" pattern="^\d*(\.\d{0,2})?$">
+                                </div>
+
+                                <div class="control-group">
+                                    <label for="prod_imagem" class="label_Form">Imagem de Demonstração: </label><br />
+                                    <input type="text" class="form-control" value="@Model.imagem" id="prod_imagem">
+                                </div>
+                                <br />
+                                <input type="hidden" value="@Model.Id" id="prod_id" />
+                                <button class="btn btn-success btn-large" onclick="cadastrar()">Salvar</button>
+                                <br />
+                                <br />
+                                @Html.ActionLink("Lista de Produtos", "Index", "Produtos", null, new { @class = "btn btn-primary btn-large", @id = "back" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function cadastrar() {
+            var id = $('#prod_id').val();
+            var nome = $('#prod_nome').val();
+            var dias = $('#prod_dias').val();
+            var valor = $('#prod_valor').val();
+            var imagem = $('#prod_imagem').val();
+            var UsuarioViewModel = {
+                Nome: nome,
+                ValorInicial: valor,
+                Imagem: imagem,
+                DiasRestantes: dias,
+                Id: id
+            }
+            $.ajax({
+                type: "POST",
+                url: "Produtos/EditarProduto",
+                data: UsuarioViewModel,
+                success: function (result) {
+                    alert('Produto editado com sucesso.');
+                    location.reload();
+                }
+            });
+        }
+    </script>
+}
+@if (@Model.TipoAcao == "Lance")
+{
+    <div class="modal fade" id="modalProduto" tabindex="-1" role="dialog" aria-labelledby="modalProdutoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Realizar Lance: @Model.Nome</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <center>
+                        <div class="card" style="width: 100%;">
+                            <img class="card-img-top" src="@Model.imagem" alt="Card image cap" width="100%" height="auto">
+                            <div class="card-body">
+                                <h1>@Model.Nome</h1>
+                                <h1>R$@Model.ValorInicial</h1>
+                            </div>
+                        </div>
+                    </center>
+                    <div class="card" style="width: 100%;">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">@Model.DiasRestantes dias de leilão</li>
+                            <li class="list-group-item">Valor inicial de: @Model.ValorInicial</li>
+                            <li class="list-group-item">Código do produto: @Model.Id </li>
+                        </ul>
+                    </div>
+                    <div class="cadastro-form">
+                        <div class="control-group">
+                            <label for="valor_lance" class="label_Form">Valor: </label><br />
+                            <input type="number" step="0.010" class="form-control" id="valor_lance">
+                        </div>
+                    </div><br />
+                    <input type="hidden" value="@Model.Id" id="prod_id" />
+                    <button class="btn btn-success btn-large" onclick="lance()">Salvar</button>
+                    <br />
+                    <table class="table1">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var lances in @Model.LancesProdtos)
+                            {
+                            <tr>
+                                <td>@lances.Key</td>
+                                <td>Lance: R$@lances.Value</td>
+                            </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        $('.table1').DataTable({
+            "bJQueryUI": true,
+            "oLanguage": {
+                "sProcessing": "Processando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "Não foram encontrados resultados",
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+                "sInfoFiltered": "",
+                "sInfoPostFix": "",
+                "sSearch": "Fazer busca Rápida:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "Primeiro",
+                    "sPrevious": "Anterior",
+                    "sNext": "Seguinte",
+                    "sLast": "Último"
+                },
+                "order": [[1, "desc"]]
+            }
+        });
+        function lance() {
+            var idProd = $('#prod_id').val();
+            var valorLance = $('#valor_lance').val();
+            var ProdutoViewModel = {
+                ValorInicial: valorLance,
+                Id: idProd
+            }
+            $.ajax({
+                type: "POST",
+                url: "Produtos/FazerLance",
+                data: ProdutoViewModel,
+                success: function (result) {
+                    alert(result.Mensagem);
+                    location.reload();
+
+                }
+            });
+        }
+    </script>
+}

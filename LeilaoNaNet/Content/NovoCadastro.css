@@ -1,0 +1,113 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color: #3498DB;
+    color: white;
+}
+
+    *:focus {
+        outline: none;
+    }
+
+.box-white {
+    margin: 20px auto;
+    width: 40%;
+}
+
+.box-screen {
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: -4px 2px 26px -4px rgba(0,0,0,0.75);
+}
+
+.app-title {
+    font-family: sans-serif;
+    text-align: center;
+    color: #777;
+}
+
+.cadastro-form {
+    text-align: center;
+}
+
+.control-group {
+    margin-bottom: 10px;
+}
+
+input {
+    text-align: center;
+    background-color: #ECF0F1;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 200;
+    padding: 10px 0;
+    width: 55%;
+    transition: border .5s;
+}
+
+    input:focus {
+        border: 2px solid #3498DB;
+        box-shadow: none;
+    }
+
+.btn {
+    border: 2px solid transparent;
+    background: #3498DB;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 25px;
+    padding: 10px 0;
+    text-decoration: none;
+    text-shadow: none;
+    border-radius: 3px;
+    box-shadow: none;
+    transition: 0.25s;
+    display: block;
+    width: 250px;
+    margin: 0 auto;
+}
+
+    .btn:hover {
+        background-color: #2980B9;
+    }
+
+.login-link {
+    font-size: 12px;
+    color: #444;
+    display: block;
+    margin-top: 12px;
+}
+
+@media only screen and (max-width: 600px) {
+    .box-white {
+        margin: 20px auto;
+        width: 100%!important;
+    }
+
+    .box-screen {
+        width: 100% !important;
+    }
+}
+
+#back {
+    background-color: darkred;
+    font-family: sans-serif;
+}
+#back:hover {
+    background-color: darkorange;
+}
+.btn-success {
+    background-color: darkgreen;
+}
+.label_Form {
+    color: black;
+    font-weight: bold;
+    font-size: 19px;
+    font-family: sans-serif;
+}

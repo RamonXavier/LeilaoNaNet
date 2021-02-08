@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink($"Bem - vindo(a) {Session["Login"]}", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (Session["Login"].Equals("Admin"))
+                    {
+                        <li>@Html.ActionLink("Usuarios", "Index", "Usuarios")</li>
+                        <li>@Html.ActionLink("Produtos", "Index", "Produtos")</li>
+                    }
+                    <li>@Html.ActionLink("Sair", "Logoff", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Ramon Xavier</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready( function () {
+        $('.table').DataTable({
+            "bJQueryUI": true,
+            "oLanguage": {
+                "sProcessing":   "Processando...",
+                "sLengthMenu":   "Mostrar _MENU_ registros",
+                "sZeroRecords":  "Não foram encontrados resultados",
+                "sInfo":         "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sInfoEmpty":    "Mostrando de 0 até 0 de 0 registros",
+                "sInfoFiltered": "",
+                "sInfoPostFix":  "",
+                "sSearch":       "Fazer busca Rápida:",
+                "sUrl":          "",
+                "oPaginate": {
+                    "sFirst":    "Primeiro",
+                    "sPrevious": "Anterior",
+                    "sNext":     "Seguinte",
+                    "sLast":     "Último"
+                }
+            }
+        }) ;
+    } );
+</script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

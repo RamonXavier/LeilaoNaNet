@@ -1,0 +1,52 @@
+﻿@model List<LeilaoNaNet.Models.Usuario>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "NovoUsuario")
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayName("Nome Usuário")
+        </th>
+        <th>
+            @Html.DisplayName("Senha do Usuário")
+        </th>
+        <th>
+            @Html.DisplayName("Idade Usuário")
+        </th>
+        <th>
+            Ação
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Senha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Idade)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarUsuario", new { id = @item.Id }, new{ @class = "btn btn-warning" })
+                    @Html.ActionLink("Detalhes", "DetalhesUsuario", new { @id = item.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Apagar", "ApagarUsuario", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>

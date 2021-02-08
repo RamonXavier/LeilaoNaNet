@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Novo Cadastro - Usuário";
+    Layout = null;
+}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<link href="~/Content/NovoCadastro.css" rel="stylesheet" />
+<body>
+    <div class="box-white">
+        <div class="box-screen">
+            <div class="app-title">
+                <h1> Cadastrar Novo usuário </h1>
+            </div>
+            <br />
+            <div class="cadastro-form">
+                <div class="control-group">
+                    <label for="login_nome" class="label_Form">Nome: </label>
+                    <input type="text" value="" placeholder="Ex:Ramon438" id="login_nome">
+
+                </div>
+
+                <div class="control-group">
+                    <label for="login_nome" class="label_Form">Idade: </label>
+                    <input type="date" value="" id="login_idade">
+                </div>
+
+                <div class="control-group">
+                    <label for="login_senha" class="label_Form">Senha: </label>
+                    <input type="text" class="key" placeholder="******" name="Senha" id="login_senha">
+                </div>
+
+                <button class="btn btn-success btn-large btn-block" onclick="cadastrar()">Cadastrar</button>
+                <br/>
+                @Html.ActionLink("Voltar ao Login", "Index","Home",null, new{ @class= "btn btn-large btn-block", @id="back"})
+            </div>
+        </div>
+    </div>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        function cadastrar() {
+            var nome = $('#login_nome').val();
+            var date = new Date($('#login_idade').val()); 
+            var idade = date.getFullYear();
+            var senha = $('#login_senha').val();
+            var UsuarioViewModel = {
+                nome: nome,
+                idade: idade,
+                senha: senha
+        }
+            $.ajax({
+                type: "POST",
+                url: "NovoUsuario",
+                data: UsuarioViewModel,
+                success: function(result) {
+                    alert(result.Mensagem);
+                    window.location.href = "/Home/Login";
+                }
+        });
+        }
+    </script>
+</body>

@@ -1,0 +1,37 @@
+﻿@model LeilaoNaNet.Models.Usuario
+
+@{
+    ViewBag.Title = "Detalhe Usuário";
+}
+<link href="~/Content/NovoCadastro.css" rel="stylesheet" />
+<style>
+    body {
+        color: black;
+    }
+</style>
+<body>
+    <div class="box-white">
+        <div class="box-screen">
+            <div class="app-title">
+                <h1>Detalhes Usuário</h1>
+            </div>
+            <br />
+            <ul class="list-group list-group-flush">
+                <li  class="list-group-item">
+                    Nome: @Html.DisplayFor(model => model.Nome)
+                </li>
+
+                <li  class="list-group-item">
+                    Senha: @Html.DisplayFor(model => model.Senha)
+                </li>
+                <li  class="list-group-item">
+                   Idade: @Html.DisplayFor(model => model.Idade)
+                </li>
+            </ul>
+            <p>
+                @Html.ActionLink("Editar", "EditarUsuario", new { id = Model.Id }) |
+                @Html.ActionLink("Listagem", "Index")
+            </p>
+        </div>
+    </div>
+

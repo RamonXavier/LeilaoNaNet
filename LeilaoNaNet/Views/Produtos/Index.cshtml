@@ -1,0 +1,90 @@
+﻿@using System.Activities.Statements
+@model List<LeilaoNaNet.Models.Produto>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br/>
+<p>
+    @Html.ActionLink("Novo Prouto", "NovoProduto", null,new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nome do produto
+            </th>
+            <th>
+                Valor inicial do produto
+            </th>
+            <th>
+                Dia de Encerramento (mês atual)
+            </th>
+            <th>Status</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valor)
+                </td>
+                <td>
+                    Dia: @Html.DisplayFor(modelItem => item.DiasAtivo) mês: @DateTime.Now.Day
+                </td>
+                @if (DateTime.Now.Day > item.DiasAtivo)
+                {
+                    <td><b><span style="color: red">Inativo</span></b></td>
+                }
+                else
+                {
+                    <td><b><span style="color: darkgreen">Ativo</span></b></td>
+                }
+                <td>
+                    @if (Session["Login"].Equals("Admin"))
+                    {
+                        <button type="button" class="btn btn-warning" onclick="modal(@item.Id, 'Produtos/EditarProdutoModal')">Editar</button>
+                        <button type="button" class="btn btn-primary" onclick="modal(@item.Id, 'Produtos/DetalheProduto')">Detalhes</button>
+                        @Html.ActionLink("Apagar", "ApagarProduto", new { id = @item.Id }, new { @class = "btn btn-danger" })
+                    }
+                    else
+                    {
+                        if (DateTime.Now.Day > item.DiasAtivo)
+                        {
+                            <button type="button" class="btn btn-success" disabled="disabled" onclick="modal(@item.Id, 'Produtos/Lance')">Fazer Lance</button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-success" onclick="modal(@item.Id, 'Produtos/Lance')">Fazer Lance</button>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="retornoDetalhe">
+
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+    function modal(id, url) {
+        var url = url;
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: { id: id },
+            success: function (result) {
+                $("#retornoDetalhe").html(result);
+                $("#modalProduto").modal();
+            }
+        });
+    }
+</script>

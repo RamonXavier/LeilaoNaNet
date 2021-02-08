@@ -1,0 +1,71 @@
+﻿@model LeilaoNaNet.Models.Produto
+
+@{
+    ViewBag.Title = "Criar Novo Produto";
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<link href="~/Content/NovoCadastro.css" rel="stylesheet" />
+<body>
+    <div class="box-white">
+        <div class="box-screen">
+            <div class="app-title">
+                <h1> Cadastrar Novo Produto </h1>
+            </div>
+            <br />
+            <div class="cadastro-form">
+                <div class="control-group">
+                    <label for="prod_nome" class="label_Form">Nome do Produto: </label><br/>
+                    <input type="text" value="" placeholder="Ex:Mesa de Jantar" id="prod_nome">
+                </div>
+
+                <div class="control-group">
+                    <label for="prod_valor" class="label_Form">Valor Inicial: </label><br/>
+                    <input type="number" step="0.010" value="" id="prod_valor" >
+                </div>
+                
+                <div class="control-group">
+                    <label for="prod_dias" class="label_Form">Dia de encerramento (do mês): </label><br/>
+                    <input type="text" value="" id="prod_dias" pattern="^\d*(\.\d{0,2})?$" >
+                </div>
+
+                <div class="control-group">
+                    <label for="prod_imagem" class="label_Form">Imagem de Demonstração: </label><br/>
+                    <input type="text" placeholder="Link da web"  id="prod_imagem">
+                </div>
+                
+                <button class="btn btn-success btn-large btn-block" onclick="cadastrar()">Cadastrar</button>
+                <br />
+                @Html.ActionLink("Lista de Produtos", "Index", "Produtos", null, new { @class = "btn btn-large btn-block", @id = "back" })
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        function cadastrar() {
+            var nome = $('#prod_nome').val();
+            var valor = $('#prod_valor').val();
+            var dias = $('#prod_dias').val();
+            var imagem = $('#prod_imagem').val();
+            var UsuarioViewModel = {
+                Nome: nome,
+                ValorInicial: valor,
+                Imagem: imagem,
+                DiasRestantes: dias,
+            }
+            $.ajax({
+                type: "POST",
+                url: "CadastroProduto",
+                data: UsuarioViewModel,
+                success: function(result) {
+                    alert('Usuário Cadastrado com sucesso.');
+                }
+        });
+        }
+    </script>
+</body>
