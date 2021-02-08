@@ -7,9 +7,11 @@ O banco de dados do sistema é utilizado pelo próprio visual studio (SQL Server
 1 - Após abrir o projeto em seu visual studio, acesse seu SQL Server Expresss e peque o nome do seu 
 servidor local:	
 	- Menu View -> SQL Server Object Explorer;
+	
 	- Expanda -> SQL Server -> (LocalDB) e clique com o botão direito em LOcalDB e escolha 'Propriedades';
 	- Na lista a direita que é apresentada, role para cima até a 1ª opção e copie um trecho parecido com este
 	na opção Connection String: "(LocalDB)\MSSQLLocalDB";
+	
 	- Abra o arquivo Web.config do projeto e encontre a string de conexão com o banco de dados e substitua o 
 	seguinte trecho: "(LocalDb)\V11.0" pelo que você encontrou no passo anterior.
 
