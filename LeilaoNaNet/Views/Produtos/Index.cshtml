@@ -6,7 +6,10 @@
 }
 <br/>
 <p>
+@if (Session["Login"].Equals("Admin"))
+{
     @Html.ActionLink("Novo Prouto", "NovoProduto", null,new { @class = "btn btn-success" })
+}
 </p>
 <table class="table">
     <thead>
