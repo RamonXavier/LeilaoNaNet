@@ -1,3 +1,4 @@
 #* linguist-vendored
-*.javaScript linguist-vendored=false
+*.javaScript linguist-vendored=true
 *.cs linguist-detectable=true
+LeilaoNaNet/LeilaoNaNet/Content/* linguist-vendored
