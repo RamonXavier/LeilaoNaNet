@@ -1,5 +1,5 @@
 *.cs linguist-detectable=true 
-*.js linguist-detectable=false 
+*.js linguist-detectable=true 
 *.html linguist-detectable=false 
 *.xml linguist-detectable=false
 LeilaoNaNet/LeilaoNaNet/Scripts/*.js linguist-vendored
